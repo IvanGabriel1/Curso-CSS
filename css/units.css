@@ -1,0 +1,146 @@
+/*
+Unidades de Medida
+
+1) Absolutas (Su valor no cambia, son unidades del mundo real).
+pc, cm, mm, in, Q
+pt (1/72in)
+px (1/96in)
+
+2) Relativas (Su valor es relativo a un contexto).
+em, rem, ex, ch - al tamaño de la fuente.
+em - basada en la anchura de la "m" de la fuente del elemento.
+rem - basada en la anchura de la "m" de la fuente del elemento raíz (html).
+ex - basada en la altura de la "x" de la fuente del elemento.
+ch - basada en la anchura del "0" de la fuente del elemento.
+% - al tamaño del contenedor
+vw, vh, vmin, vmax - al tamaño del viewport
+vw - ancho del viewport van de 1 a 100.
+vh - alto del viewport van de 1 a 100.
+vmax - entre vw y vh toma el que tenga mayor valor.
+vmin - entre vw y vh toma el que tenga menor valor.
+
+Conversiones entre unidades - http://pxtoem.com/ 
+*/
+
+html {
+  box-sizing: border-box;
+  font-size: 20px;
+  font-size: 16px;
+  background-color: black;
+}
+
+body {
+  background-color: beige;
+  margin: 0;
+}
+
+*,
+*::after,
+*::before {
+  box-sizing: inherit;
+}
+
+.pixels {
+  background-color: cadetblue;
+  width: 500px;
+  height: 400px;
+  padding: 20px;
+  font-size: 16px;
+  border: thick solid rebeccapurple;
+}
+
+/*
+Ems - La base no siempre va a ser 16px. Lo que tenes que tener en cuenta es la base del tamaño de letra que se tiene asignado, el valor que tiene en el font size en el contenedor padre, si no tiene padre se fija cual es el valor del ancestro (en este caso el body que por defecto tiene 16).
+En el ejemplo de abajo, 2 ems no valen lo mismo. si le ponemos 2 ems al padre, vale 32px (2x16).
+En cambio 2 ems al hijo, le valen 48px. Por que el padre tiene 24px. 24px*2ems = 48px. 
+*/
+
+.ems {
+  background-color: cadetblue;
+  font-size: 24px;
+  border: thick solid rebeccapurple;
+}
+/* El hijo tiene font size de 2 em (48px) El padding, que es 1 em, va a ser 48px, por que ya esta definido que el em del hijo es de 48. Por mas que haya que poner que eran 2 ems del padre*/
+.em-child {
+  background-color: salmon;
+  border: thick solid beige;
+  margin: 0.5em;
+  padding: 1em;
+  font-size: 2em;
+}
+
+.rems {
+  background-color: cadetblue;
+  font-size: 24px;
+  padding: 1rem 0.5rem;
+  border: 5px thick solid rebeccapurple;
+}
+
+.rem-child {
+  background-color: salmon;
+  border: thick solid beige;
+  margin: 0.5rem;
+  padding: 1rem;
+  font-size: 2rem;
+}
+
+.exs {
+  background-color: cadetblue;
+  font-size: 24px;
+  padding: 1ex 0.5ex;
+  border: 5px thick solid rebeccapurple;
+}
+
+.ex-child {
+  background-color: salmon;
+  border: thick solid beige;
+  margin: 0.5ex;
+  padding: 1ex;
+  font-size: 2ex;
+}
+
+.chs {
+  background-color: cadetblue;
+  width: 10ch;
+}
+
+.percentages {
+  background-color: darkkhaki;
+  padding: 5%;
+  margin: 20% 10%;
+  width: 80%;
+  font-size: 100%;
+  height: 100%;
+}
+
+.height-parent {
+  background-color: brown;
+  width: 500px;
+  height: 500px;
+}
+
+.height-child {
+  background-color: coral;
+  width: 50%;
+  height: 50%;
+}
+
+.viewport {
+  background-color: darkcyan;
+  width: 50vw;
+  width: 100%;
+  width: 100vw;
+  /* Recuerda que la etiqueta body tiene margenes por defecto y recuerda que las barras de Scroll del navegador también forman parte del viewport */
+  height: 50vh;
+  height: 100vh;
+  font-size: 5vw;
+  padding: 2vh 2vw;
+}
+
+.vmin,
+.vmax {
+  background-color: darksalmon;
+  border: thick solid cyan;
+  width: 50vmax;
+  height: 50vmin;
+}

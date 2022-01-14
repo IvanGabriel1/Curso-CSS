@@ -1,0 +1,25 @@
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+.card {
+  border: medium solid black;
+  width: 400px;
+  height: 400px;
+}
+
+.card img {
+  background-color: beige;
+  height: 300px;
+  /* Para evitar la deformacion de la imagen: (parecido con los backgrounds cover y position)*/
+  object-fit: fill; /* Valor por defecto */
+  object-fit: cover; /* No se deforma pero si se recorre. */
+  object-fit: contain; /* Se asegura que toda la imagen este contenida, corriendo el riezgo que hayan lugares donde queda en blanco */
+  object-fit: none; /* No adaptar */
+  object-fit: scale-down; /* toma el valor que sea menor de los valores contain y none */
+  object-position: left top; /* Que ponga desde el margen desde arriba a la izquierda */
+  object-position: -50% center;
+  object-position: right bottom;
+  object-position: 50% 50%; /* Valor por defecto, la centra. (primer valor para x y segundo para y) */
+}

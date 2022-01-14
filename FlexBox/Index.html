@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Aprendiendo FlexBox</title>
+  <style>
+    *,
+    *::after,
+    *::before {
+      box-sizing: border-box;
+    }
+
+
+    .container {
+      background-color: #333;
+      height: 400px;
+      width: 100%;
+
+
+
+      display: inline-flex;
+      display: flex;
+      /* Define que una caja será flexbox de bloque o flexbox de línea */
+      /* El comportamiento por defauldt es que se va a alinear y que la direccion por defecto es horizontal, en fila. Si hay otra caja, la va a aplicar abajo. Es una caja flexible que trabaja en bloque.
+      Si tenemos la necesidad de agrupar varias cajas en linea usamos inline-flex, y las cajas pasan a ocupar el ancho que necesitan */
+
+      /* Flex-direction define el eje principal (main axis) row - x, column - y */
+      flex-direction: row;
+      /* Por defecto */
+      flex-direction: row-reverse;
+      /* Pone al que estaba primero, ultimo. Tambien lleva el texto al otro extremo de la pantalla. */
+      flex-direction: column-reverse;
+      /* Los pone de forma vertical pero empezando con el ultimo */
+      flex-direction: column;
+      /* Los pone en forma de columna, vertical */
+
+      flex-direction: row;
+
+      /* 
+      La propiedad flex-wrap de CSS especifica si los elementos "hijos" son obligados a permanecer en una misma línea o pueden fluir en varias líneas. 
+      Le dice si los elementos van a estar alineados en una sola linea, o considerando el ancho de cada elemento. Por mas que se achique la pantalla, no se van a pasar abajo, se genera el scroll tapando lo que no se llega a contener.*/
+      flex-wrap: wrap-reverse;
+      /* wrap-reverse: los elementos se colocan en varias líneas si no caben en una sola línea, pero las líneas se muestran de abajo arriba */
+      flex-wrap: wrap;
+      /* wrap: los elementos se colocan en varias líneas si no caben en una sola línea */
+      flex-wrap: nowrap;
+      /* nowrap: los elementos se colocan en una sola línea */
+
+
+      flex-flow: row nowrap;
+      /* Flex-flow Es un shortcut de flexdirection y flex-wrap */
+
+
+      /* Justify-content: Define la alineación de los elementos hijos, respecto del eje principal(main-axis) (que lo define flex-direction.)*/
+      justify-content: center;
+      justify-content: space-between;
+      justify-content: space-around;
+      justify-content: space-evenly;
+      justify-content: flex-start;
+      /* 
+       flex-start: Por defecto - empezando desde la izquierda /
+       center: centrando el contenido y dejando margen a ambos lados /
+       flex-end: dejando el margen a la izquierda y el contenido a la derecha /
+       Space-between: Usa todo el contenido de la linea, sin margenes a la izquierda y derecha, y ajustando hacia el centro el resto de contenido, con espacios intermedios. /
+       Space-around: deja un poco de margen hacia izquierda y derecha y ajusta los espacios entre el contenido de forma equitativa /
+       Space-envenly: Deja un margen equitativo empezando con el margen de la izquierda de la pantalla como hacia la derecha de la pantalla, y luego en medio del contenido. */
+      /* Importante: Justify-content define la alineacion en el eje principal, no necesariamente va a ser x. (Si flex flow esta en row será X. Si esta en column será en el eje Y.)
+      Esta propiedad aplica del espacio sobrante de la caja padre. Si no hay espacio no va a haber lugar para definir que hacer con ese espacio, por que no hay. */
+
+      /* Align-items: funciona por cada linea que tengamos. Define la alineación de los hijos en el eje transversal (cross axis) dentro de cada linea */
+      align-items: flex-end;
+      align-items: baseline;
+      align-items: flex-start;
+      align-items: center;
+      align-items: stretch;
+      /* Stretch: Valor por defecto - No va a funcionar si se le define alto y ancho como hicimos en .item abajo. Todos los elementos toman el mismo tamaño en la dirección secundaria
+       -flex-start: los elementos se sitúan al principio de la dirección secundaria (es decir, arriba si la dirección secundaria es vertical).
+       -flex-end: los elementos se sitúan al final de la dirección secundaria (es decir, abajo si la dirección secundaria es vertical)
+       -center: los elementos se sitúan en el centro de la dirección secundaria (es decir, en medio si la dirección secundaria es vertical).
+       -Baseline: Los elementos se alinean segun la primera linea de texto, todos van a usar el mismo reenglon por mas que tengan distintos tamaños de letra.
+      Trabaja sobre cada una de las lineas. */
+
+
+      /*La propiedad align-content establece la manera en que se reparte el espacio sobrante en la dirección secundaria.*/
+
+      align-content: flex-end;
+      /* flex-end: los elementos se sitúan al final de la dirección secundaria, es decir, el espacio disponible se sitúa al principio. */
+      align-content: center;
+      /* center: los elementos se sitúan en el centro de la dirección secundaria, es decir, el espacio disponible se reparte entre el principio y el final */
+      align-content: space-between;
+      /* space-between: el espacio disponible se reparte entre los elementos. */
+      align-content: space-around;
+      /* space-around: el espacio disponible se reparte entre los elementos y en los extremos */
+      align-content: space-evenly;
+
+      align-content: stretch;
+      /* stretch: los elementos aumentan su tamaño en la dirección secundaria de manera que ocupan todo el espacio disponible */
+      align-content: flex-start;
+      /* flex-start: los elementos se sitúan al principio de la dirección secundaria, es decir, el espacio disponible se sitúa al final. */
+      /* Define la alineación de los hijos en el eje transversal (cross axis), NO funciona cuando los hijos están en UNA sóla lÍnea (Cuando flex:wrap: nowrap NO FUNCIONA) */
+      /* Flex-start / flex-end / center / space-between / space-around / space-evenly/ stretch */
+    }
+
+    .item {
+      border: medium solid #999;
+      /* width: 20%;
+      height: 20%; */
+      /* width: 100px; */
+      background-color: #666;
+
+      flex-grow: 0;
+      /* Flex-grow: Cuando la caja flexbox tenga espacio sobrante, es la habilidad o el factor de crecer, valor por defecto es 0, NO se aceptan valores negativos.
+      (Valor por defecto es 0 - "No crescas")
+      
+      Supongamos que tenemos 3 elementos de 100px y el contenedor tiene 1000px.
+      Sobrarian 700px de espacio. El flex-grow: 1; Haria que esos 700px se rapartan en porciones iguales ya que todos tienen el valor 1. (todos quedarian con 100px + (700%3))
+      Si a un elemento en particular le ponemos flex-grow: 2; y los demas tienen 1:
+      al que tiene grow 2 le corresponderia el 50% de los 700px. y los otros 2 le corresponderian 25%. 
+      
+      */
+      flex-shrink: 1;
+      /* Flex-shrink: Cuando la caja flexbox NO tenga espacio sobrante, es la habilidad o el factor de encogerse, valor por defecto es 1, NO se aceptan valores negativos. 
+      (Valor por defecto es 1 - "Si encogete si la caja flex empieza a ser mas pequeña")
+      Si ponemos valor 0 no va a encogerse a medida sea mas chica la pantalla.
+
+      Supongamos que tenemos 3 elementos de 100px y el contenedor tiene 200px.
+      Se encogeria 100px de espacio. El flex-shrink: 1 en los 3 elementos harian que los 3 elementos tengan  66.66px cada uno.
+      Si a 1 de esos 3 elementos le ponemos un valor de shrink: 2; y los otros 2 los dejamos con shrink: 1; 
+      el que tengan valor 2 se reduciria el doble que los demas.
+      En este ejemplo. El que tiene shrink 2 le quedaria un espacio de 50px. (de los 100px que se encogio el contenedor, 50px los sufrio solo el que tiene valor 2. y los demas se encogieron la mitad, 25px c/u)
+      
+      */
+      flex-basis: auto;
+      flex-basis: 100px;
+
+      /* Flex-basis: Es el tamaño del elemento hijo dentro de la línea de la caja flexbox
+      Si la caja flexbox tiene dirección de fila, flex-basis representa el width
+      Si la caja flexbox tiene direccion de columna, flex-basis representa el height 
+      Valor por defecto auto.
+      (Flex-basis tiene mas especificidad que width.)*/
+
+      flex: 0 1 150px;
+      /* Es un shorthand de las propiedades flex-grow flex-shrink y flex-basis, en ese orden */
+
+      order: 0;
+      /*  Representa ol orden que tendrán los elementos hijos en la caja flexbox
+      Valor por defecto 0
+      Se aceptan valores positivos y negativos
+      Un valor menor siempre irá antes que un valor mayor
+      */
+      align-self: stretch;
+      /* Sobreescribe el valor de la propiedad align-items sólo para el elemento hijo especificado
+Strech / Flex-start / flex-end / center / baseline
+*/
+    }
+
+    .item:nth-child(2) {
+      /* flex-grow: 0; */
+      /* flex-shrink: 2; */
+      order: 1;
+      order: -1;
+    }
+
+    .item:nth-child(3) {
+      /* flex-grow: 0; */
+      align-self: flex-start;
+      align-self: flex-end;
+      align-self: baseline;
+      align-self: center;
+    }
+
+    /* .item:nth-child(2),
+    .item:nth-child(17) {
+      font-size: 250%;
+    } */
+  </style>
+</head>
+
+<body>
+  <section class="container">
+    <article class="item">Flex Item 1</article>
+    <article class="item">Flex Item 2</article>
+    <article class="item">Flex Item 3</article>
+    <article class="item">Flex Item 4</article>
+    <article class="item">Flex Item 5</article>
+  </section>
+  <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+  <section class="container">
+    <article class="item">Flex Item 1</article>
+    <article class="item">Flex Item 2</article>
+    <article class="item">Flex Item 3</article>
+  </section>
+  <br><br>
+  <section class="container">
+    <article class="item">Item 1 </article>
+    <article class="item">Item 2</article>
+    <article class="item">Item 3</article>
+    <article class="item">Item 4</article>
+    <article class="item">Item 5</article>
+    <article class="item">Item 6</article>
+    <article class="item">Item 7</article>
+    <article class="item">Item 8</article>
+    <article class="item">Item 9</article>
+    <article class="item">Item 10</article>
+    <article class="item">Item 11</article>
+    <article class="item">Item 12</article>
+    <article class="item">Item 13</article>
+    <article class="item">Item 14</article>
+    <article class="item">Item 15</article>
+    <article class="item">Item 16</article>
+    <article class="item">Item 17</article>
+    <article class="item">Item 18</article>
+    <article class="item">Item 19</article>
+  </section>
+</body>
+
+</html>

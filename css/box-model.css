@@ -1,0 +1,247 @@
+/*
+https://developer.mozilla.org/es/docs/Learn/CSS/Building_blocks/The_box_model
+
+Modelo de Caja: Es la forma en que CSS ve a los elementos HTML, y como los ve? Como si fueran cajas con las siguientes caracteristicas: 
+1. El contenido (Content): El contenido (texto) del elemento HTML, tomando en cuenta sus dimensiones (width y height)
+2. El borde (border): Lo que delimita cada uno de los elementos HTML.
+3. El relleno (padding): Son las distancias internas (La distancia del borde al contenido)
+4. El margen(margin): Son las distancias externas (la distancia entre el elemento HTML y sus elementos hermanos o padres)
+
+Dentro del modelo de caja hay que considerar que una caja tendra 4 lados:
+1. Arriba (top)
+2. Derecha (right)
+3. Abajo (bottom)
+4. Izquiera (left)
+
+*/
+
+body {
+  margin: 0;
+}
+
+h1 {
+  width: 400px;
+  height: 200px;
+  /* Propiedades de tipo Shorthand */
+  border-color: green;
+  border-top-color: red;
+  border-width: thick; /* thin - 1px, medium - 3px, thick - 5px*/
+  border-style: dotted;
+  border: 2px dashed blue;
+}
+
+.caja-uno,
+.caja-dos {
+  background-color: chocolate;
+  border: medium solid orange;
+  /*
+  Esto aplica para margin y padding
+  1 valor = aplicar a los 4 lados.
+  2 valores = primer valor es para los lados verticales (top y bottom)
+  Segundo valor es para los lados horizontales (left y righ)
+  3 valores = Primer valor es para top
+  Segundo valor es para los lados horizontales
+  Tercer valor es para bottom
+  4 valores = (Piensa en las manecillas del reloj)
+  1 valor es para top (12)
+  2 valor es para right (3)
+  3 valor es para bottom (6)
+  4 valor es para left (9)
+  */
+  padding: 20px;
+  margin: 20px;
+  padding: 20px 40px;
+  margin: 40px 20px;
+  padding: 0 40px 20px;
+  margin: 50px 30px 0;
+  padding: 0 40px 20px 50px;
+  margin: 100px 50px 30px 0;
+}
+
+/*
+Caja de Linea
+-Ocupan el espacio necesario para mostrar su contenido.
+-No tienen dimensiones modificables (alto, ancho)
+-Permiten otros elementos a su lado
+-Padding y margin solo empujan a elementos adyacentes en horizontal, NUNCA EN VERTICAL.
+
+Caja de Bloque
+-Ocupan todo el ancho disponible, lo que genera saltos de linea
+-Tienen dimensiones modificables (alto, ancho)
+-No permiten otros elementos a su lado (aunque especifiquen su ancho, siguen ocupando todo el espacio disponible generando saltos de linea)
+*/
+
+.caja-linea,
+.caja-bloque {
+  background-color: darkcyan;
+  color: white;
+  width: 500px;
+  height: 250px;
+  border: medium solid black;
+  padding: 16px;
+}
+
+.caja-bloque {
+  margin: 32px;
+  display: block;
+}
+
+.caja-linea {
+  margin: 48px;
+  display: inline;
+}
+
+/*
+inline block (es una caja de linea, que ignoran sus dimenciones alto y ancho) cuando le pones inline block, se sige comportando como de linea pero acepta valores de ancho y alto.
+Propiedad Display: 
+Inline
+Block
+inline-block - Se comporta como un elemento de línea pero acepta modificar sus dimensiones (Alto y Anchop)
+none (Se carga pero no se vizualisa)
+table
+list-item
+flex - Ve mi curso de Flexbox
+grid - Ve mi curso de Grid CSS
+*/
+
+.caja-none,
+.caja-linea-bloque,
+.caja-hidden {
+  background-color: darkolivegreen;
+  color: white;
+  width: 600px;
+  height: 300px;
+  border: medium solid black;
+}
+
+.caja-linea-bloque {
+  display: inline-block;
+}
+
+.caja-none {
+  display: none;
+}
+
+.caja-hidden {
+  visibility: hidden; /* Se oculta, pero concerva el espacio */
+}
+
+/* OverFlow = Define cómo se muestra el contenido desbordado tanto en el eje horizontal como en el vertical. */
+
+.overflow {
+  background-color: darkturquoise;
+  width: 200px;
+  height: 100px;
+  overflow: visible;
+  overflow: hidden;
+  overflow: scroll;
+  overflow: auto;
+  /*overflow-y: scroll; (Scroll en el eje y) */
+  /*overflow-x: scroll; (Scroll en el eje x) */
+}
+
+/*
+Tamaño de Caja
+sizing = dimensionamiento
+*/
+
+.box-sizing-content,
+.box-sizing-border {
+  background-color: deepskyblue;
+  box-sizing: content-box;
+  width: 500px;
+  height: 250px;
+  padding: 10px;
+  border: thick solid black;
+  /* w 500 + 10 + 10 (los 10 son los padding) + 5 + 5 (los 5 son los bordes thick) = 530*/
+  /* h 250 + 10 + 10 (los 10 son los padding) + 5 + 5 (los 5 son los bordes thick) = 280 */
+}
+
+.box-sizing-border {
+  box-sizing: border-box;
+}
+
+.container-col-3 {
+  background-color: burlywood;
+  width: 600px;
+  height: 300px;
+  margin-top: 20px;
+}
+
+/* border-box significa = empieza a contar el tamaño de la caja desde el borde, es decir, considera todo lo que el usuario aplique estilos a bordes, a padding y al contenido de cada caja */
+
+.container-col-3 > * {
+  box-sizing: border-box;
+  width: 200px;
+  border: thin solid red;
+  padding: 10px;
+  float: left;
+}
+
+/* 
+https://www.paulirish.com/2012/box-sizing-border-box-ftw/
+apply a natural box layout model to all elements, but allowing components to change 
+"Si tu pones esto en el inicio de tus hojas de estilos, Con esto reseteas a que el tamaño de las cajas, de todos los documentos de html que tengas en tu documento no empiezen desde el contenido, sino desde el borde y ya cuando tengas que hacer este tipo de maquetacion a 2 columnas, a 3 columnas y tengas que sacar calculos de cuanto tengas que ocupar cada columna, lo podemos hacer y sin preocuparte que mas adelante tengas que agregar border, o paddings a los elementos.
+*/
+html {
+  box-sizing: border-box;
+}
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
+
+/* Floats - Ya estan quedando en desuso, tratar de no usarlos, pero es importante saber como funcionaban.*/
+.container-floats {
+  background-color: cornflowerblue;
+}
+
+.float-left {
+  float: left;
+}
+.float-right {
+  float: right;
+}
+
+.clearfix {
+  clear: both;
+}
+
+/* Colapso de margenes verticales - Si pones un margen para abajo de 10 px y en el reenglon 2 pones un margen de 10 px para arriba, no vamos a tener 20px de margen entre el reenglon 1 y el 2. Sino que se superponen, queda con un margen de 10.
+En los margenes horizontales si se van sumando los margenes de un elemento con los margenes de otro.
+ El colapso se da con Top y Bottom.
+ Muchos aplican margenes solo una opcion, que todos los elementos tengan margin top o margin bottom */
+
+.margin-collapse {
+  background-color: skyblue;
+}
+
+.margin-collapse section {
+  border: thin solid black;
+  margin-top: 16px;
+  margin-bottom: 16px;
+}
+
+.margin-collapse span {
+  border: thin solid black;
+  display: inline-block;
+  margin-right: 16px;
+  margin-left: 16px;
+}
+
+/* Centrado de Cajas*/
+.sitio-web {
+  border: thin solid black;
+  background-color: thistle;
+  width: 800px;
+  height: 1000px;
+  padding: 16px;
+  margin-left: auto;
+  margin-right: auto;
+  /*margin: 0 auto; Evitar poner este margin 0 auto, salvo que estemos muy seguros que los elementos que estamos centrando respecto de la pagina no va a tener margenes ni arriba ni abajo.
+  usar :
+  margin-left: auto;
+  margin-right: auto;
+   */
+}

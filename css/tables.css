@@ -1,0 +1,16 @@
+.table {
+  font-size: 3rem;
+  border-collapse: collapse; /* Los bordes ya estan pegados, no hay espacios entre las celdas */
+  border-collapse: collapse;
+  border-collapse: separate; /* Valor por Defecto */
+  empty-cells: hide; /* Si hay una celda vacia, la borra con bordes y todo. */
+  empty-cells: show; /* Valor por Defecto */
+}
+
+table,
+th,
+td {
+  border: medium solid black;
+  border-spacing: 0;
+  border-spacing: 10px; /* Espacio entre las celdas. */
+}
