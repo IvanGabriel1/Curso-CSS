@@ -58,6 +58,10 @@ body {
 3) Definir Scroll-snap-type: 
  */
 
+/* scroll-snap-type acepta un segundo parámetro que determina si el viewport de nuestro contenido se debe ajustar a los elementos de forma obligatoria o sólo si está muy próximo de sus bordes. mandatory : Al terminar de hacer scroll, el scroll se mueve automáticamente SIEMPRE al punto de ajuste que se haya determinado.
+------------
+scroll-snap-align: Esta propiedad se usa a nivel de cada elemento que tengamos en nuestro contenedor y nos indica cómo se tendrá que alinear el elemento en el viewport. */
+
 .carousel {
   border: thick solid #d938f0;
   display: flex;

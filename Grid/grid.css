@@ -178,6 +178,10 @@ img {
   grid-auto-columns: 50px;
 }
 
+/* Grid-auto-rows / grid-auto-columns: En el ejemplo tenemos una grid de 5 x 3. Si ponemos mas elementos que los 15 que tiene la grid implicita, se van a seguir generando, con grid-auto-rows le decimos el tamaño que van a tener estos que se generan automaticamente, lo mismo con grid-auto-columns
+
+grid-auto-flow: Si el elemento va a estar ordenados por 1 - 2 - 3 (en fila) o el columna de arriba hacia abajo */
+
 /* Cuando el flujo de la grid es en columnas y colapsamos el numero de columnas definidas, se van a generar automaticamente, mas columnas. Pasa lo mismo con las filas, si ponemos mas filas de las que definimos, se van a generar filas.  */
 
 .grid-flow-dense {
@@ -248,7 +252,8 @@ img {
 }
 
 .grid-order .item:nth-child(1) {
-  /* Valor por defecto es 0. Valores negativos y positivos. Aplica solo para dentro del flujo de la grid.*/
+  /* Valor por defecto es 0. Valores negativos y positivos. Aplica solo para dentro del flujo de la grid.
+  Esto lo que hace es ordenar en la grid en base al order que le definamos. El order mas bajo es el que va a ir primero en el flujo.*/
   order: 1;
 }
 
@@ -288,7 +293,7 @@ img {
   /* Grid de 3cx2r */
   grid-template-columns: repeat(3, 200px);
   grid-template-rows: repeat(2, 200px);
-  /* Justify-content: Es la propiedad que nos va a alinear los TRACKS en el eje X. */
+  /* Justify-content: Es la propiedad que nos va a alinear los TRACKS (toda una fila o columna) en el eje X. */
   justify-content: start;
   justify-content: end;
   justify-content: center;
@@ -309,7 +314,10 @@ img {
   /* Grid de 4cx?r */
   grid-template-columns: repeat(4, 1fr);
   grid-template-columns: repeat(4, minmax(100px, 200px));
-  grid-template-columns: repeat(4, minmax(min-content, 200px));
+  grid-template-columns: repeat(
+    4,
+    minmax(min-content, 200px)
+  ); /* El valor menor va a ser el tamaño minimo del contenido */
   grid-template-columns: repeat(4, minmax(100px, min-content));
   grid-template-columns: repeat(4, minmax(100px, max-content));
   grid-template-columns: repeat(4, minmax(max-content, 200px));
@@ -335,7 +343,7 @@ img {
     2,
     100px 200px
   ); /* Esto no funciona. Repeat solo funciona en grid-template-columns/rows. */
-  grid-auto-rows: 150px; /* A partir que se generen filas fuera de las definidas. Tendran 150px de height*/
+  grid-auto-rows: 150px; /* Las filas que se generen fuera de las definidas. Tendran 150px de height*/
 }
 
 .grid-dynamics {
@@ -356,6 +364,9 @@ img {
   gap: 1vh 1vw; /* Gap es la separacion entre los elementos. */
   gap: 0;
 }
+
+/* Anidacion de grid: Es para un elemento que es parte de una grid, tenga su propia grid con hijos.
+nested = Anidada */
 
 .grid-nested {
   display: grid;
